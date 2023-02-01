@@ -2,6 +2,9 @@ import classes from "./User.module.css";
 import { Component } from "react";
 
 class User extends Component {
+  componentWillUnmount() {
+    console.log("this is cleanup function. User will UnMount!");
+  }
   render() {
     return <li className={classes.user}>{this.props.name}</li>;
   }
