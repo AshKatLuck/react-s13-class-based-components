@@ -1,4 +1,4 @@
-import { useState, Component } from "react";
+import { Component } from "react";
 import User from "./User";
 
 import classes from "./Users.module.css";
@@ -7,34 +7,30 @@ class Users extends Component {
   constructor() {
     super();
     this.state = {
-      showUsers: false,
+      showUsers: true,
       moreState: "Somthing",
     };
   }
-  DUMMY_USERS = [
-    { id: "u1", name: "Max" },
-    { id: "u2", name: "Manuel" },
-    { id: "u3", name: "Julie" },
-  ];
-  usersList = (
-    <ul>
-      {this.DUMMY_USERS.map((user) => (
-        <User key={user.id} name={user.name} />
-      ))}
-    </ul>
-  );
+
   toggleUsersHandler() {
     this.setState((currState) => {
       return { showUsers: !currState.showUsers };
     });
   }
   render() {
+    const usersList = (
+      <ul>
+        {this.props.users.map((user) => (
+          <User key={user.id} name={user.name} />
+        ))}
+      </ul>
+    );
     return (
       <div className={classes.users}>
         <button onClick={this.toggleUsersHandler.bind(this)}>
-          {this.showUsers ? "Hide" : "Show"} Users
+          {this.state.showUsers ? "Hide" : "Show"} Users
         </button>
-        {this.showUsers && this.usersList}
+        {this.state.showUsers && usersList}
       </div>
     );
   }
